@@ -41,7 +41,7 @@ char	*read_file(char *rest, int fd)
 	{
 		rc = read(fd, reading, BUFFER_SIZE);
 		if (rc < 0)
-			return (ft_free(rest));
+			return (ft_free(reading));
 		reading[rc] = '\0';
 		rest = ft_strjoin(rest, reading);
 	}
@@ -56,8 +56,6 @@ char	*get_line(char *rest, int i)
 
 	if (!rest[0])
 		return (NULL);
-	//if (rest[i] == '\n')
-	//	i++;
 	line = malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
@@ -85,7 +83,7 @@ char	*recover_rest(char *rest, int i)
 	while (rest[i])
 		save[y++] = rest[i++];
 	save[y] = '\0';
-	free(rest);
+	ft_free(rest);
 	return (save);
 }
 
@@ -94,7 +92,7 @@ char	*get_next_line(int fd)
 	char static	*rest;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
 		return (NULL);
 	rest = read_file(rest, fd);
 	if (!rest)
@@ -111,7 +109,9 @@ int main (void)
 	char *line;
 
 	fd = open("file", O_RDONLY);
-	
+	//fd = -2;
+
+
 	line = get_next_line(fd);
 	printf("ligne 1 : %s", line);
 	
@@ -130,8 +130,10 @@ int main (void)
 	 line = get_next_line(fd);
 	 printf("ligne 6 : %s", line);
 
-	 line = get_next_line(fd);
-	 printf("ligne 7 : %s", line);
 
-	close(fd);
+	//close(fd);
+
+	line = get_next_line(fd);
+	printf("ligne 7 : %s", line);
+	
 }*/

@@ -21,10 +21,10 @@ char*get_line(int fd, cahr *line, char **rest)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	rest[OPEN_MAX][BUFFER_SIZE];
+	static char	*rest[OPEN_MAX];
 
 	line = NULL;
-	if (BUFFER_SIZE < 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	return(get_line(fd, line, rest[fd]));
 }
