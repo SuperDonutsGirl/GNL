@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!s)
@@ -38,7 +37,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (NULL);
- 	i = 0;
+	i = 0;
 	y = 0;
 	str = malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
@@ -55,7 +54,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_strchr(char *s, int c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!s)
@@ -63,7 +62,7 @@ char	*ft_strchr(char *s, int c)
 	while (s[i] && s[i] != (char)c)
 		i++;
 	if (s[i] == (char)c)
-		return ((s + i));
+		return (s + i);
 	return (NULL);
 }
 

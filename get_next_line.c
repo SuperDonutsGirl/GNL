@@ -11,20 +11,18 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-int	is_line(char *str)
+size_t	is_line(char *str)
 {
-	int	i;
+	size_t	i;
 
+	if (!str)
+		return (0);
 	i = 0;
-	if (str)
-	{
-		while (str[i] && str[i] != '\n')
-			i++;
-		if (str[i] == '\n')
-			i++;
-	}
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		i++;
 	return (i);
 }
 
@@ -49,7 +47,7 @@ char	*read_file(char *rest, int fd)
 	return (rest);
 }
 
-char	*get_line(char *rest, int i)
+char	*get_line(char *rest, size_t i)
 {
 	char	*line;
 	size_t	y;
@@ -69,12 +67,12 @@ char	*get_line(char *rest, int i)
 	return (line);
 }
 
-char	*recover_rest(char *rest, int i)
+char	*recover_rest(char *rest, size_t i)
 {
 	char	*save;
 	size_t	y;
 
-	if (!rest[i])
+	if (!rest[0])
 		return (ft_free(rest));
 	save = malloc(sizeof(char) * (ft_strlen(rest) - i) + 1);
 	if (!save)
